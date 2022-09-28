@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Save",
+                    "type": "Button",
+                    "id": "6417941f-2acd-4fff-8611-135e92fb6b1d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -161,6 +170,17 @@
                     "processors": "InvertVector2(invertX=false),ScaleVector2(x=0.02,y=0.02)",
                     "groups": "",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "813c2362-d81b-4c08-8d3b-41b28d8a4959",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Save",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

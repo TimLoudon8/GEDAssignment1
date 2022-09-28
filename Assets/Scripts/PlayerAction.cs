@@ -62,6 +62,15 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Save"",
+                    ""type"": ""Button"",
+                    ""id"": ""6417941f-2acd-4fff-8611-135e92fb6b1d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -185,6 +194,17 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""813c2362-d81b-4c08-8d3b-41b28d8a4959"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Save"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -285,6 +305,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_Save = m_Player.FindAction("Save", throwIfNotFound: true);
         // Editor
         m_Editor = asset.FindActionMap("Editor", throwIfNotFound: true);
         m_Editor_EnableEditor = m_Editor.FindAction("EnableEditor", throwIfNotFound: true);
@@ -354,6 +375,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_Save;
     public struct PlayerActions
     {
         private @PlayerAction m_Wrapper;
@@ -362,6 +384,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputAction @Save => m_Wrapper.m_Player_Save;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -383,6 +406,9 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @Save.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSave;
+                @Save.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSave;
+                @Save.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSave;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -399,6 +425,9 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @Save.started += instance.OnSave;
+                @Save.performed += instance.OnSave;
+                @Save.canceled += instance.OnSave;
             }
         }
     }
@@ -466,6 +495,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnSave(InputAction.CallbackContext context);
     }
     public interface IEditorActions
     {

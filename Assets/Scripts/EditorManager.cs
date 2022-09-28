@@ -18,20 +18,14 @@ public class EditorManager : MonoBehaviour
     public bool editorMode = false;
     bool instantiated = false;
 
+    Vector3 mousePos;
 
-    private void OnEnable()
-    {
-        inputAction.Enable();
-    }
+    Subject subject = new Subject();
 
-    private void OnDisable()
+    // Setup
+    void Start()
     {
-        inputAction.Disable();
-    }
-
-    void Awake()
-    {
-        inputAction = new PlayerAction();
+        inputAction = PlayerInputController.controller.inputAction;
 
         inputAction.Editor.EnableEditor.performed += cntxt => SwitchCamera();
 
@@ -43,12 +37,14 @@ public class EditorManager : MonoBehaviour
         editorCam.enabled = false;
     }
 
+    // Switches to and from editor cam view
     private void SwitchCamera()
     {
         mainCam.enabled = !mainCam.enabled;
         editorCam.enabled = !editorCam.enabled;
     }
 
+    // Creates an item from a prefab when key is pressed
     private void AddItem(int ItemID)
     {
         if(editorMode && !instantiated)
@@ -57,23 +53,32 @@ public class EditorManager : MonoBehaviour
             {
                 case 1:
                     item = Instantiate(prefab1);
+                    SpikeBall spike1 = new SpikeBall(item, new GreenMat());
+                    subject.AddObserver(spike1);
                     break;
-
                 case 2:
                     item = Instantiate(prefab2);
+                    SpikeBall spike2 = new SpikeBall(item, new YellowMat());
+                    subject.AddObserver(spike2);
                     break;
-
                 default:
                     break;
             }
-
+            subject.Notify();
             instantiated = true;
         }
     }
 
+    // Places the item
     private void DropItem()
     {
+        if (editorMode && instantiated)
+        {
+            item.GetComponent<Rigidbody>().useGravity = true;
+            item.GetComponent<Collider>().enabled = true;
 
+            instantiated = false;
+        }
     }
 
     void Update()
@@ -91,6 +96,13 @@ public class EditorManager : MonoBehaviour
             Time.timeScale = 1;
             Cursor.lockState = CursorLockMode.Locked;
         }
-    }
 
+        if (instantiated)
+        {
+            mousePos = Mouse.current.position.ReadValue();
+            mousePos = new Vector3(mousePos.x, mousePos.y, 10f);
+
+            item.transform.position = editorCam.ScreenToWorldPoint(mousePos);
+        }
+    }
 }

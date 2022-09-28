@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 89142559}
   - component: {fileID: 89142560}
   - component: {fileID: 89142561}
+  - component: {fileID: 89142562}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -184,9 +185,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 963194227}
   editorCam: {fileID: 1994198165}
-  prefab1: {fileID: 919132149155446097, guid: b6bf2049247b5a246a22207a2cbd3d48, type: 3}
-  prefab2: {fileID: 0}
+  prefab1: {fileID: 6110158633174018351, guid: 5410004c82ef64e4dbdb938c58d490f2, type: 3}
+  prefab2: {fileID: 2077019515297807087, guid: fb914d56da2dcae418ed289e55ba6cb1, type: 3}
   editorMode: 0
+--- !u!114 &89142562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89142558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a8525f16c837548af24e05541dba06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &165541521 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 203d53b18a402de47b77f060511ae0b6, type: 3}
@@ -573,7 +586,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151712656}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.009600937
@@ -662,7 +675,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525547047}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.009600937
@@ -1032,7 +1045,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1994198163}
   m_LocalRotation: {x: 0.7003283, y: -0, z: -0, w: 0.71382093}
-  m_LocalPosition: {x: 1.46, y: 11.99, z: -7.92}
+  m_LocalPosition: {x: 1.46, y: 15, z: -7.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1100,8 +1113,8 @@ MonoBehaviour:
   playerCamera: {fileID: 963194227}
   bullet: {fileID: 5708704035381716820, guid: 6dedaa70603144a4f93cc6811bfbcb88, type: 3}
   projectilePos: {fileID: 909128815}
---- !u!136 &2058462410
-CapsuleCollider:
+--- !u!65 &2058462410
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1110,7 +1123,6 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.3524022
-  m_Height: 4.492795
-  m_Direction: 1
-  m_Center: {x: -0.021740679, y: 1.746397, z: 0.0067006894}
+  serializedVersion: 2
+  m_Size: {x: 2.6756387, y: 3.9132128, z: 1.3951199}
+  m_Center: {x: -0.023290891, y: 1.831187, z: 0.1975598}

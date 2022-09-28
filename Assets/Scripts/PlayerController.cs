@@ -29,26 +29,15 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
     public Transform projectilePos;
 
-    private void OnEnable()
-    {
-        inputAction.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputAction.Disable();
-    }
-
-
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         if (!instance)
         {
             instance = this;
         }
 
-        inputAction = new PlayerAction();
+        inputAction = PlayerInputController.controller.inputAction;
 
         inputAction.Player.Move.performed += cntxt => move = cntxt.ReadValue<Vector2>();
         inputAction.Player.Move.canceled += cntxt => move = Vector2.zero;
@@ -73,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
     public void Shoot()
     {
+        Destroy(bullet);
         Rigidbody bulletRb = Instantiate(bullet, projectilePos.position, Quaternion.identity).GetComponent<Rigidbody>();
         bulletRb.AddForce(transform.forward * 32f, ForceMode.Impulse);
         bulletRb.AddForce(transform.up * 5f, ForceMode.Impulse);
