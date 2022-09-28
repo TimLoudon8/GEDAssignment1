@@ -7,4 +7,4 @@ In the second tutorial, we created a shooting class, an editor camera, jumping, 
 the editor cam's function to place objects only works once and places the object at the origin.
 
 I have changed the collider on the player from capsule to box to minimize falling over, attempted to despawn bullets after they are fired,
-movement now works with a singleton and coins no longer have a collider and are treated as a trigger.
+movement now works with a singleton and coins no longer have a collider and are treated as a trigger.  Also, placing objects in editor cam now works as intended.
