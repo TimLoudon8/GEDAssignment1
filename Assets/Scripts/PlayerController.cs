@@ -19,11 +19,25 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     private float distanceToGround;
     private bool isGrounded = true;
+    private float jump = 5f;
 
     //Player animation
     Animator playerAnimator;
     private bool isWalking = false;
 
+    //Projectile bullets
+    public GameObject bullet;
+    public Transform projectilePos;
+
+    private void OnEnable()
+    {
+        inputAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputAction.Disable();
+    }
 
 
     // Start is called before the first frame update
@@ -39,9 +53,29 @@ public class PlayerController : MonoBehaviour
         inputAction.Player.Move.performed += cntxt => move = cntxt.ReadValue<Vector2>();
         inputAction.Player.Move.canceled += cntxt => move = Vector2.zero;
 
+        inputAction.Player.Jump.performed += cntxt => Jump();
+
+        inputAction.Player.Shoot.performed += cntxt => Shoot();
+
         rb = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
+    }
+
+    public void Jump()
+    {
+        if (isGrounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jump);
+            isGrounded = false;
+        }
+    }
+
+    public void Shoot()
+    {
+        Rigidbody bulletRb = Instantiate(bullet, projectilePos.position, Quaternion.identity).GetComponent<Rigidbody>();
+        bulletRb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+        bulletRb.AddForce(transform.up * 5f, ForceMode.Impulse);
     }
 
     // Update is called once per frame
